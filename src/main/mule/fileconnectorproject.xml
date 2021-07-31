@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="60362ad2-4614-40e2-a906-a7ea053909b0" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<file:config name="File_Config" doc:name="File Config" doc:id="9f6c3264-eddd-4d7f-9fb0-6623e7767455" >
+		<file:connection workingDir="C:\Users\Salma\Desktop\DevOps\POC1-cicd" />
+	</file:config>
+	<flow name="fileconnectorprojectFlow" doc:id="3019420d-ad52-4026-8ad8-3fae81fcf274" >
+		<http:listener doc:name="Listener" doc:id="94c6ce81-cbc5-4d40-9499-e8762a7fafd4" config-ref="HTTP_Listener_config" path="/test"/>
+		<file:write doc:name="Write" doc:id="45e8d738-f375-49bd-965b-a6c6329027a6" config-ref="File_Config" path="C:\Users\Salma\Desktop\DevOps\POC1-cicd\newData.txt"/>
+		<logger level="INFO" doc:name="Logger" doc:id="b24ca40e-49e6-4588-8351-ca818ad2c0cf" message="Incoming data saved in given location "/>
+	</flow>
+</mule>
